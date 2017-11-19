@@ -59,7 +59,7 @@ function generate_zipcode_city($postcode_id = null){
 
 function signup_user($formData, $formFiles){
 	global $dbconnection;
-
+	
 	$email = $formData['email'];
 
 	$query = "SELECT * FROM users WHERE email='".$email."'";
@@ -67,6 +67,8 @@ function signup_user($formData, $formFiles){
 
 	if($result->num_rows != 0){
 		echo "Desværre, der allerede en som har den email adresse du prøver at tilmelde med";
+		echo "<br>";
+		echo "<a href='?side=login'>Gå tilbage?</a>";
 		die();
 	}
 
