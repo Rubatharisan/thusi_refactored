@@ -12,3 +12,11 @@
 	<body>
     <div class="container">
     	<br>
+
+    	<?php
+    	if($_SESSION['user']){
+    		include('partials/navigation/member.header.php');
+    	} else {
+    		include('partials/navigation/guest.header.php');
+    	}
+    	?>

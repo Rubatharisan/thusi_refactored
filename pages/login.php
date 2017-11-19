@@ -1,5 +1,7 @@
 <?php
 $pageTitel = "Login page";
+$javascript = "login.js";
+
 include('partials/header.php');
 
 if(isset($_GET['action']) && $_GET['action'] == 'login'){
@@ -7,20 +9,12 @@ if(isset($_GET['action']) && $_GET['action'] == 'login'){
 }
 
 if(isset($_GET['action']) && $_GET['action'] == 'signup'){
-	var_dump($_FILES, $_POST);
-	$data = file_get_contents( $_FILES['profilepicture']['tmp_name'] );
-	$base64 = base64_encode($data);
-	//var_dump($base64);
-	signup_user($_POST);
+	signup_user($_POST, $_FILES);
 }
 
 ?>
-<img src="<?php echo $base64; ?>" alt="">
-<?php
-die();
-?>
 
-<form action="?action=login" method="POST" style="display:none">
+<form id="loginForm" action="?action=login" method="POST">
 	<fieldset class="form-group">
 		<label for="inputEmail">Email-address</label>
 		<input type="email" class="form-control" id="email" placeholder="Enter email" name="email">
@@ -30,9 +24,11 @@ die();
 		<input type="password" class="form-control" id="password" placeholder="Password" name="password">
 	</fieldset>
 	<button type="submit" class="btn btn-primary">Login</button>
+	<a id="signup_button">Ny bruger?</a>
 </form>
 
-<form action=?action=signup method="POST" enctype="multipart/form-data">
+
+<form id="signupForm" action=?action=signup method="POST" enctype="multipart/form-data" style="display:none">
 	<hr>
 	<fieldset class="form-group">
 		<label for="inputEmail">Email address</label>
@@ -88,7 +84,6 @@ die();
 	
 	<button type="submit" class="btn btn-primary">Submit</button>
 </form>
-
 
 
 <?php
